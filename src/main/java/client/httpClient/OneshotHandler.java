@@ -20,17 +20,21 @@ public class OneshotHandler extends SimpleChannelInboundHandler<HttpObject>{
         log.error("channel active, client connected to server");
     }
 
+    // 传进来的是 Http object,它是 httpResponse 的子类
     @Override
     public void channelRead0(ChannelHandlerContext ctx, HttpObject msg) {
 
         log.info("message received from server");
+
+        // class io.netty.handler.codec.http.HttpObjectAggregator$AggregatedFullHttpResponse
+        log.info("msg class: " + msg.getClass().toString());
+
 
         if (msg instanceof HttpResponse) {
             HttpResponse response = (HttpResponse) msg;
 
             System.err.println("STATUS: " + response.getStatus());
             System.err.println("VERSION: " + response.getProtocolVersion());
-            System.err.println();
 
             if (!response.headers().isEmpty()) {
                 for (CharSequence name: response.headers().names()) {

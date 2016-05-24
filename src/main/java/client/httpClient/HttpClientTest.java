@@ -18,11 +18,12 @@ public class HttpClientTest {
         HttpRequest httpRequest = HttpRequestBuilder.createGetRequest();
 
         ChannelInboundHandler oneShotHandler = new OneshotHandler();
+
         Bootstrap bootstrap = CommonClientBootStrap.createBootStrap(oneShotHandler);
         try {
-            Channel channel = bootstrap.connect("icam-dev-soa-01", 2015).sync().channel();
+            Channel channel = bootstrap.connect("host1", 9200).sync().channel();
 
-            //send http request
+            // send http request
             channel.writeAndFlush(httpRequest);
 
             // Wait for the server to close the connection.

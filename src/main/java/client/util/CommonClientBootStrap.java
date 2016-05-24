@@ -7,6 +7,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.HttpClientCodec;
 import io.netty.handler.codec.http.HttpContentDecompressor;
+import io.netty.handler.codec.http.HttpObjectAggregator;
 
 /**
  * Created by xinszhou on 5/20/16.
@@ -28,6 +29,7 @@ public class CommonClientBootStrap {
                 ChannelPipeline p = ch.pipeline();
                 p.addLast(new HttpClientCodec());
                 p.addLast(new HttpContentDecompressor());
+                p.addLast(new HttpObjectAggregator(512*1024));
                 p.addLast(inboundHandlerAdapter);
             }
         });
