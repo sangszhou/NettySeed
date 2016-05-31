@@ -4,6 +4,8 @@ public abstract class TaskCallback {
 
     /**
      * 执行动作
+     *
+     * @todo 不知道这里把 TaskFuture 当做参数是否合理
      */
     public abstract TaskFuture apply(TaskFuture f);
 

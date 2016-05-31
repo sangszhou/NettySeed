@@ -30,7 +30,7 @@ public class CommonClientBootStrap {
                 p.addLast(new HttpClientCodec());
                 p.addLast(new HttpContentDecompressor());
                 p.addLast(new HttpObjectAggregator(512*1024));
-                p.addLast(inboundHandlerAdapter);
+//                p.addLast(inboundHandlerAdapter);
             }
         });
 

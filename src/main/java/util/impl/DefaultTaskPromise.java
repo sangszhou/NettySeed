@@ -122,6 +122,7 @@ public class DefaultTaskPromise implements TaskPromise {
             }
 
             if (this.complteLatch == null) {
+                log.info("await time: " + System.currentTimeMillis());
                 this.complteLatch = new CountDownLatch(1);
             }
         }
@@ -140,6 +141,7 @@ public class DefaultTaskPromise implements TaskPromise {
             if (isDone()) {
                 return true;
             }
+
             if (this.complteLatch == null) {
                 this.complteLatch = new CountDownLatch(1);
             }
@@ -292,7 +294,11 @@ public class DefaultTaskPromise implements TaskPromise {
 
             this.result = holder;
             if (this.complteLatch != null) {
+
+                log.info("set complete time: " + System.currentTimeMillis());
                 this.complteLatch.countDown();
+            } else {
+                log.info("completeLatch is null at the time: " + System.currentTimeMillis());
             }
         }
         return true;

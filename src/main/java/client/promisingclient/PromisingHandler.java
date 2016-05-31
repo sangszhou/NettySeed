@@ -24,21 +24,15 @@ public class PromisingHandler extends SimpleChannelInboundHandler<HttpObject> {
 
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
 
-//        System.err.println("START OF CONTENT {");
-
         if (msg instanceof HttpContent) {
             HttpContent content = (HttpContent) msg;
-
-//            System.err.print(content.content().toString(CharsetUtil.UTF_8));
-//            System.err.flush();
 
             if (content instanceof HttpContent) {
                 sendFullResponse(ctx, content);
             } else {
-                log.error("content is not DefaultFullHttpResponse");
+                log.error("content is not http content");
             }
         }
-
     }
 
     void sendFullResponse(ChannelHandlerContext ctx, HttpContent msg) {
